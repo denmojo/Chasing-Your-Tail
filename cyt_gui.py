@@ -38,7 +38,7 @@ class CYTGui:
         self.root.geometry('800x480')  # Optimized for 7-inch screens
         
         # Create main container
-        main_frame = tk.Frame(self.root, bg='#1a1a1a', padx=20, pady=20)
+        main_frame = tk.Frame(self.root, bg='#1a1a1a', padx=20, pady=10)
         main_frame.pack(fill=tk.BOTH, expand=True)
         
         # Title and status section
@@ -56,13 +56,13 @@ class CYTGui:
     def create_header(self, parent):
         """Create header with title and security badge"""
         header_frame = tk.Frame(parent, bg='#1a1a1a')
-        header_frame.pack(fill=tk.X, pady=(0, 20))
+        header_frame.pack(fill=tk.X, pady=(0, 10))
         
         # Main title
         title_label = tk.Label(
             header_frame,
             text="🔒 Chasing Your Tail",
-            font=('Arial', 18, 'bold'),
+            font=('Arial', 8, 'bold'),
             fg='#00ff41',  # Matrix green
             bg='#1a1a1a'
         )
@@ -72,7 +72,7 @@ class CYTGui:
         security_badge = tk.Label(
             header_frame,
             text="🛡️ SECURED",
-            font=('Arial', 10, 'bold'),
+            font=('Arial', 8, 'bold'),
             fg='#ffffff',
             bg='#ff6b35',  # Orange badge
             padx=10,
@@ -81,14 +81,14 @@ class CYTGui:
         security_badge.pack(side=tk.RIGHT)
         
         # Subtitle
-        subtitle_label = tk.Label(
-            parent,
-            text="Wi-Fi Probe Request Analyzer - BlackHat Arsenal Ready",
-            font=('Arial', 10),
-            fg='#cccccc',
-            bg='#1a1a1a'
-        )
-        subtitle_label.pack(pady=(0, 10))
+#        subtitle_label = tk.Label(
+#            parent,
+#            text="Wi-Fi Probe Request Analyzer - BlackHat Arsenal Ready",
+#            font=('Arial', 10),
+#            fg='#cccccc',
+#            bg='#1a1a1a'
+#        )
+#        subtitle_label.pack(pady=(0, 10))
         
     def create_status_section(self, parent):
         """Create status indicators section"""
@@ -101,7 +101,7 @@ class CYTGui:
             padx=10,
             pady=10
         )
-        status_frame.pack(fill=tk.X, pady=(0, 20))
+        status_frame.pack(fill=tk.X, pady=(0, 10))
         
         # Status indicators row
         indicators_frame = tk.Frame(status_frame, bg='#2a2a2a')
@@ -142,13 +142,13 @@ class CYTGui:
         controls_frame = tk.LabelFrame(
             parent,
             text="Controls",
-            font=('Arial', 12, 'bold'),
+            font=('Arial', 10, 'bold'),
             fg='#ffffff',
             bg='#2a2a2a',
             padx=10,
             pady=10
         )
-        controls_frame.pack(fill=tk.X, pady=(0, 20))
+        controls_frame.pack(fill=tk.X, pady=(0, 10))
         
         # Top row buttons
         top_row = tk.Frame(controls_frame, bg='#2a2a2a')
@@ -210,7 +210,7 @@ class CYTGui:
         self.run_cyt_btn = tk.Button(
             bottom_row,
             text="🚀 START\nCHASING YOUR TAIL",
-            font=('Arial', 11, 'bold'),
+            font=('Arial', 9, 'bold'),
             width=18,
             height=2,
             fg='#ffffff',
@@ -275,7 +275,7 @@ class CYTGui:
         log_frame = tk.LabelFrame(
             parent,
             text="Output Log",
-            font=('Arial', 10, 'bold'),
+            font=('Arial', 9, 'bold'),
             fg='#ffffff',
             bg='#2a2a2a',
             padx=10,
@@ -287,7 +287,7 @@ class CYTGui:
         self.log_text = scrolledtext.ScrolledText(
             log_frame,
             height=10,
-            font=('Courier', 14),
+            font=('Courier', 10),
             bg='#000000',
             fg='#00ff41',  # Matrix green text
             insertbackground='#00ff41',
@@ -351,7 +351,7 @@ class CYTGui:
             except:
                 self.creds_status.config(text="❌ Credentials: Error", fg='#dc3545')
         else:
-            self.creds_status.config(text="⚠️ Credentials: Optional", fg='#ffaa00')
+            self.creds_status.config(text="✅ Credentials: Injected", fg='#28a745')
             
     def check_kismet_running(self):
         """Check if Kismet is running"""
