@@ -129,7 +129,7 @@ python3 legacy/create_ignore_list.py  # Moved to legacy folder
 - **surveillance_detector.py**: Core persistence detection engine for suspicious device patterns
 - **gps_tracker.py**: GPS tracking with location clustering and spectacular Google Earth KML generation
 - **probe_analyzer.py**: Post-processing tool with WiGLE integration
-- **start_kismet_clean.sh**: ONLY working Kismet startup script (July 23, 2025 fix)
+- **~~start_kismet_clean.sh**: ONLY working Kismet startup script (July 23, 2025 fix)~~ (hardcoded values)
 
 ### Security Components
 - **secure_database.py**: SQL injection prevention
@@ -199,7 +199,7 @@ All settings are centralized in `config.json`:
   "ignore_lists_directory": "./ignore_lists/",
   "api_keys": {
   	"wigle": "your_base64encoded_APIName:APIKey_from_WIGLE"
-  }
+  },
   "time_windows": {
     "recent": 5,
     "medium": 10,
