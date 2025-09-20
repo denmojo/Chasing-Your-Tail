@@ -16,7 +16,7 @@ This project has been security-hardened to eliminate critical vulnerabilities:
 
 - **Real-time Wi-Fi monitoring** with Kismet integration
 - **Advanced surveillance detection** with persistence scoring
-- **🆕 Automatic GPS integration** - extracts coordinates from Bluetooth GPS via Kismet
+- **🆕 Automatic GPS integration** - extracts coordinates from GPS via Kismet
 - **GPS correlation** and location clustering (100m threshold)
 - **Spectacular KML visualization** for Google Earth with professional styling and interactive content
 - **Multi-format reporting** - Markdown, HTML (with pandoc), and KML outputs
@@ -32,8 +32,9 @@ This project has been security-hardened to eliminate critical vulnerabilities:
 - Python 3.6+
 - Kismet wireless packet capture
 - Wi-Fi adapter supporting monitor mode
-- Linux-based system
-- WiGLE API key (optional)
+- Linux-based system (e.g. pi 5 4GB with Pi OS Desktop)
+	- cyt_gui.py designed for 7" Pi OS Desktop touchscreen
+- [WiGLE](https://wigle.net/) API key (optional)
 
 ## Installation & Setup
 
@@ -44,8 +45,6 @@ pip3 install -r requirements.txt
 
 ### 2. Security Setup (REQUIRED FIRST TIME)
 ```bash
-# Migrate credentials from insecure config.json
-python3 migrate_credentials.py
 
 # Verify security hardening
 python3 chasing_your_tail.py
@@ -61,6 +60,9 @@ Edit `config.json` with your paths and settings:
 
 ## Usage
 
+### Running
+If GPS is installed, allow GPS to get fix before starting kismet with gps support, otherwise, start kismet in configured kismet_logs directory to drop .kismet files for use of CYT.
+
 ### GUI Interface
 ```bash
 python3 cyt_gui.py  # Enhanced GUI with surveillance analysis
@@ -74,9 +76,6 @@ python3 cyt_gui.py  # Enhanced GUI with surveillance analysis
 ```bash
 # Start core monitoring (secure)
 python3 chasing_your_tail.py
-
-# Start Kismet (ONLY working script - July 23, 2025 fix)
-./start_kismet_clean.sh
 ```
 
 ### Data Analysis
@@ -138,7 +137,7 @@ python3 legacy/create_ignore_list.py  # Moved to legacy folder
 - **secure_ignore_loader.py**: Safe ignore list loading
 - **secure_main_logic.py**: Secure monitoring logic
 - **input_validation.py**: Input sanitization and validation
-- **migrate_credentials.py**: Credential migration tool
+- **migrate_credentials.py**: Credential migration tool (deprecating)
 
 ## Output Files & Project Structure
 
@@ -152,7 +151,7 @@ python3 legacy/create_ignore_list.py  # Moved to legacy folder
 
 ### Configuration & Data
 - **Ignore Lists**: `./ignore_lists/mac_list.json`, `./ignore_lists/ssid_list.json`
-- **Encrypted Credentials**: `./secure_credentials/encrypted_credentials.json`
+- **Encrypted Credentials**: `./secure_credentials/encrypted_credentials.json` (deprecated)
 
 ### Archive Directories (Cleaned July 23, 2025)
 - **old_scripts/**: All broken startup scripts with hanging pkill commands
@@ -198,6 +197,9 @@ All settings are centralized in `config.json`:
   "kismet_db_path": "/path/to/kismet/*.kismet",
   "log_directory": "./logs/",
   "ignore_lists_directory": "./ignore_lists/",
+  "api_keys": {
+  	"wigle": "your_base64encoded_APIName:APIKey_from_WIGLE"
+  }
   "time_windows": {
     "recent": 5,
     "medium": 10,
@@ -207,12 +209,9 @@ All settings are centralized in `config.json`:
 }
 ```
 
-WiGLE API credentials are now securely encrypted in `secure_credentials/encrypted_credentials.json`.
-
 ## Security Features
 
 - **Parameterized SQL queries** prevent injection attacks
-- **Encrypted credential storage** protects API keys
 - **Input validation** prevents malicious input
 - **Audit logging** tracks all security events
 - **Safe ignore list loading** eliminates code execution risks
